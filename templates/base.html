@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} | ChronoCare-AI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffe4ec, #ffe9f2);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 250px;
+      background: linear-gradient(180deg, #e91e63, #ff6f61);
+      padding-top: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar .nav-link {
+      color: white;
+      font-weight: 500;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar .nav-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .sidebar .nav-link i {
+      margin-right: 10px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 250px;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    /* Custom Card Styles */
+    .card-custom {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+      border-radius: 15px 15px 0 0 !important;
+      font-weight: 600;
+    }
+
+    /* Custom Button Styles */
+    .btn-custom {
+      position: relative;
+      padding: 10px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 50px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #28a745, #34c759);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #34c759, #28a745);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(45deg, #007bff, #00c4ff);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(45deg, #00c4ff, #007bff);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    }
+
+    /* Form Enhancements */
+    .form-control, .form-select {
+      border-radius: 10px;
+      border: 2px solid #e91e63;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #ff6f61;
+      box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #e91e63;
+    }
+
+    /* Table Enhancements */
+    .table-custom thead {
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+    }
+
+    .table-custom tbody tr {
+      transition: background 0.3s ease;
+    }
+
+    .table-custom tbody tr:hover {
+      background: rgba(233, 30, 99, 0.05);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #e91e63;
+      font-weight: 700;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-250px);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  {% if 'user_id' in session %}
+  <div class="sidebar">
+    <div class="text-center mb-4">
+      <a class="navbar-brand brand text-white" href="#">ChronoCare-AI</a>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.dashboard') }}"><i class="bi bi-house-door"></i> Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.lifestyle_form') }}"><i class="bi bi-clipboard-data"></i> Lifestyle Input</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.predict') }}"><i class="bi bi-heart-pulse"></i> Health Prediction</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.forecast') }}"><i class="bi bi-calendar-week"></i> 7-Day Forecast</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.insights') }}"><i class="bi bi-lightbulb"></i> Insights</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.appointments') }}"><i class="bi bi-calendar-check"></i> Appointments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('auth.chatbot') }}"><i class="bi bi-chat-dots"></i> Chatbot</a>
+      </li>
+      <li class="nav-item mt-auto">
+        <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- Main Content -->
+  <div class="main-content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

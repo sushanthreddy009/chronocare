@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% for category, msg in msgs %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endwith %}
+
+  <h1 class="mb-4">Welcome to Your Dashboard</h1>
+
+  <div class="mb-4">
+    <a href="{{ url_for('auth.appointments') }}" class="btn btn-custom btn-primary me-2">Book Appointment</a>
+    <a href="{{ url_for('auth.chatbot') }}" class="btn btn-custom btn-primary">Chat with Health Assistant</a>
+  </div>
+
+  <div class="card card-custom mb-4">
+    <div class="card-header">Analytics</div>
+    <div class="card-body">
+      <ul class="list-unstyled">
+        <li><i class="bi bi-moon-fill text-primary me-2"></i> <strong>Average Sleep:</strong> {{ avg_sleep }} hrs</li>
+        <li><i class="bi bi-heart-fill text-success me-2"></i> <strong>Average Exercise:</strong> {{ avg_exercise }} mins</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-custom mb-4">
+    <div class="card-header">💡 Suggestions</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        {% for tip in suggestions %}
+          <li class="list-group-item">{{ tip }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-md-6 mb-4">
+      <div class="card card-custom">
+        <div class="card-header">📊 Sleep Over Time</div>
+        <div class="card-body">
+          <canvas id="sleepChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card card-custom">
+        <div class="card-header">📊 Exercise Over Time</div>
+        <div class="card-body">
+          <canvas id="exerciseChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card card-custom">
+        <div class="card-header">📊 Stress Level Breakdown</div>
+        <div class="card-body">
+          <canvas id="stressChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-custom">
+    <div class="card-header">Your Lifestyle Entries</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-custom">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Sleep</th>
+              <th>Diet</th>
+              <th>Exercise</th>
+              <th>Stress</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for e in entries %}
+            <tr>
+              <td>{{ e.timestamp.strftime("%Y-%m-%d %H:%M") if e.timestamp else "Unknown" }}</td>
+              <td>{{ e.sleep_hours }}</td>
+              <td>{{ e.diet_quality }}</td>
+              <td>{{ e.exercise_minutes }}</td>
+              <td>{{ e.stress_level }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Sleep Line Chart
+  new Chart(document.getElementById('sleepChart'), {
+    type: 'line',
+    data: {
+      labels: {{ chart_labels|tojson }},
+      datasets: [{
+        label: 'Sleep (hrs)',
+        data: {{ sleep_data|tojson }},
+        borderColor: '#007bff',
+        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true },
+        tooltip: { enabled: true }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Date' } },
+        y: { title: { display: true, text: 'Hours' }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Exercise Bar Chart
+  new Chart(document.getElementById('exerciseChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ chart_labels|tojson }},
+      datasets: [{
+        label: 'Exercise (mins)',
+        data: {{ exercise_data|tojson }},
+        backgroundColor: 'rgba(40, 167, 69, 0.7)',
+        borderColor: '#28a745',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true },
+        tooltip: { enabled: true }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Date' } },
+        y: { title: { display: true, text: 'Minutes' }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Stress Pie Chart
+  new Chart(document.getElementById('stressChart'), {
+    type: 'pie',
+    data: {
+      labels: {{ stress_labels|tojson }},
+      datasets: [{
+        data: {{ stress_counts|tojson }},
+        backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+        borderColor: '#fff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { enabled: true }
+      }
+    }
+  });
+</script>
+{% endblock %}

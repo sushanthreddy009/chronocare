@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Book an Appointment</h1>
+
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% for category, msg in msgs %}
+      <div class="alert alert-{{ category }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+
+  <!-- Doctor Selection -->
+  <h3>Select a Doctor</h3>
+  <div class="mb-4">
+    <select id="doctorSelect" class="form-select">
+      <option value="">Choose a doctor...</option>
+      {% for doctor in doctors %}
+        <option value="{{ doctor.id }}">{{ doctor.name }} ({{ doctor.specialty }})</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Date and Slot Selection -->
+  <div class="mb-4">
+    <label for="datePicker" class="form-label">Select Date</label>
+    <input type="date" id="datePicker" class="form-control" min="{{ today }}">
+  </div>
+  <div class="mb-4">
+    <label class="form-label">Available Slots</label>
+    <div id="slotsContainer" class="d-flex flex-wrap gap-2">
+      <p>Select a doctor and date to view slots.</p>
+    </div>
+  </div>
+  <button id="bookButton" class="btn btn-primary" disabled>Book Appointment</button>
+
+  <!-- User's Booked Appointments -->
+  <h3 class="mt-5">Your Appointments</h3>
+  {% if appointments %}
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appt in appointments %}
+            <tr>
+              <td>{{ appt.doctor.name }} ({{ appt.doctor.specialty }})</td>
+              <td>{{ appt.date.strftime('%Y-%m-%d') }}</td>
+              <td>{{ appt.time_slot }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm cancel-btn" data-id="{{ appt.id }}">Cancel</button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No appointments booked.</p>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const doctorSelect = document.getElementById('doctorSelect');
+  const datePicker = document.getElementById('datePicker');
+  const slotsContainer = document.getElementById('slotsContainer');
+  const bookButton = document.getElementById('bookButton');
+  let selectedSlot = null;
+
+  // Set minimum date to today
+  const today = new Date().toISOString().split('T')[0];
+  datePicker.min = today;
+  datePicker.value = today;
+
+  // Fetch slots when doctor or date changes
+  async function fetchSlots() {
+    const doctorId = doctorSelect.value;
+    const date = datePicker.value;
+    if (!doctorId || !date) {
+      slotsContainer.innerHTML = '<p>Select a doctor and date to view slots.</p>';
+      bookButton.disabled = true;
+      return;
+    }
+
+    const response = await fetch(`/api/slots/${doctorId}?date=${date}`);
+    const data = await response.json();
+
+    if (data.error) {
+      slotsContainer.innerHTML = `<p class="text-danger">${data.error}</p>`;
+      bookButton.disabled = true;
+      return;
+    }
+
+    slotsContainer.innerHTML = data.slots.length
+      ? data.slots.map(slot => `
+          <button class="btn btn-outline-primary slot-btn" data-slot="${slot}">${slot}</button>
+        `).join('')
+      : '<p>No slots available.</p>';
+
+    // Add click handlers for slot buttons
+    document.querySelectorAll('.slot-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('btn-primary'));
+        btn.classList.add('btn-primary');
+        selectedSlot = btn.dataset.slot;
+        bookButton.disabled = false;
+      });
+    });
+  }
+
+  // Book appointment
+  bookButton.addEventListener('click', async () => {
+    if (!selectedSlot) return;
+
+    const response = await fetch('/api/appointments/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        doctor_id: doctorSelect.value,
+        date: datePicker.value,
+        time_slot: selectedSlot
+      })
+    });
+
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      alert(data.message);
+      window.location.reload();
+    }
+  });
+
+  // Cancel appointment
+  document.querySelectorAll('.cancel-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to cancel this appointment?')) return;
+
+      const response = await fetch(`/api/appointments/cancel/${btn.dataset.id}`, {
+        method: 'DELETE'
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        alert(data.error);
+      } else {
+        alert(data.message);
+        window.location.reload();
+      }
+    });
+  });
+
+  // Event listeners
+  doctorSelect.addEventListener('change', fetchSlots);
+  datePicker.addEventListener('change', fetchSlots);
+
+  // Initial fetch
+  fetchSlots();
+</script>
+{% endblock %}

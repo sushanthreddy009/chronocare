@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Health Chatbot{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-4 brand">ChronoCare Health Chatbot</h1>
+    <p class="text-center lead mb-4">Ask me anything about health, diet, exercise, or stress management!</p>
+
+    <div class="card shadow-sm" style="max-width: 800px; margin: 0 auto; background: #fff; border-radius: 15px;">
+      <div class="card-body" style="height: 400px; overflow-y: auto; background: #f9f9f9; border-radius: 15px;" id="chatWindow">
+        {% if initial_message %}
+          <div class="chat-message bot-message mb-3">
+            <div class="p-3 rounded" style="background: #e91e63; color: white; display: inline-block; max-width: 70%;">
+              {{ initial_message }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if user_message %}
+          <div class="chat-message user-message mb-3 text-end">
+            <div class="p-3 rounded" style="background: #007bff; color: white; display: inline-block; max-width: 70%;">
+              {{ user_message }}
+            </div>
+          </div>
+        {% endif %}
+        {% if bot_response %}
+          <div class="chat-message bot-message mb-3">
+            <div class="p-3 rounded" style="background: #e91e63; color: white; display: inline-block; max-width: 70%;">
+              {{ bot_response|replace('\n', '<br>')|safe }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="card-footer">
+        <form method="POST" action="{{ url_for('auth.chatbot') }}">
+          <div class="input-group">
+            <input type="text" name="message" class="form-control" placeholder="Type your message..." required>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('auth.dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+      <a href="{{ url_for('auth.home') }}" class="btn btn-outline-secondary">Back to Home</a>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const chatWindow = document.getElementById('chatWindow');
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+</script>
+{% endblock %}

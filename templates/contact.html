@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us - ChronoCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff0f5, #f8e1e9);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+      border: 2px solid #e91e63;
+    }
+
+    h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      color: #e91e63;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #e91e63;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #ff9a8b;
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    .submit-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(45deg, #ff9a8b, #e91e63);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    .contact-numbers {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .contact-numbers p {
+      margin: 5px 0;
+    }
+
+    .contact-numbers a {
+      color: #e91e63;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-numbers a:hover {
+      text-decoration: underline;
+    }
+
+    /* Back to Home Button */
+    .back-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(45deg, #ff9a8b, #e91e63);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    /* Floral Decorations */
+    .container::before,
+    .container::after {
+      content: '🌸';
+      position: absolute;
+      font-size: 2rem;
+      color: #ff9a8b;
+      opacity: 0.5;
+    }
+
+    .container::before {
+      top: -20px;
+      left: -20px;
+    }
+
+    .container::after {
+      bottom: -20px;
+      right: -20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌸 Contact Us 🌸</h1>
+    <p>We’d love to hear from you! Please fill out the form below, and we’ll get back to you soon.</p>
+    <form method="POST" action="{{ url_for('auth.contact') }}">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+
+    <div class="contact-numbers">
+      <p>For urgent queries, call us on:</p>
+      <p>Prashanth: <a href="tel:+919502140708">+91-9502140708</a></p>
+      <p>Sushanth: <a href="tel:+919391778282">+91-9391778282</a></p>
+    </div>
+  </div>
+
+  <a href="{{ url_for('auth.home') }}" class="back-btn">Back to Home</a>
+</body>
+</html>

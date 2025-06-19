@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Lifestyle Insights{% endblock %}
+
+{% block content %}
+<h2>Lifestyle Insights</h2>
+
+<div class="card card-custom mb-3">
+  <div class="card-header">🛌 Sleep</div>
+  <div class="card-body">
+    <p><strong>Average Sleep:</strong> {{ avg_sleep }} hours</p>
+    <p><strong>Sleep Quality:</strong> {{ sleep_quality }}</p>
+    <p><em>{{ sleep_tip }}</em></p>
+  </div>
+</div>
+
+<div class="card card-custom mb-3">
+  <div class="card-header">🏃 Exercise</div>
+  <div class="card-body">
+    <p><strong>Average Daily Exercise:</strong> {{ avg_exercise }} minutes</p>
+    <p><em>{{ exercise_tip }}</em></p>
+  </div>
+</div>
+
+<div class="card card-custom mb-3">
+  <div class="card-header">🧠 Stress Summary (Past 7 Entries)</div>
+  <div class="card-body">
+    <ul class="list-unstyled">
+      <li><i class="bi bi-emoji-smile-fill text-success me-2"></i> Low Stress: {{ stress_summary["Low"] }}</li>
+      <li><i class="bi bi-emoji-neutral-fill text-warning me-2"></i> Moderate Stress: {{ stress_summary["Moderate"] }}</li>
+      <li><i class="bi bi-emoji-frown-fill text-danger me-2"></i> High Stress: {{ stress_summary["High"] }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{{ url_for('auth.generate_report') }}" class="btn btn-custom btn-secondary">Download PDF Report</a>
+</div>
+{% endblock %}

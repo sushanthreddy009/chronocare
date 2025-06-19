@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card card-custom" style="max-width: 600px; margin: 0 auto;">
+  <div class="card-header">Lifestyle Input Form</div>
+  <div class="card-body">
+    <form method="POST" action="/lifestyle">
+      <input type="hidden" name="user_id" value="{{ user_id }}">
+      <div class="form-group mb-3">
+        <label for="sleep_hours">Sleep Hours</label>
+        <input type="number" name="sleep_hours" id="sleep_hours" class="form-control" step="0.1" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="diet_quality">Diet Quality</label>
+        <select name="diet_quality" id="diet_quality" class="form-select" required>
+          <option>Excellent</option>
+          <option>Good</option>
+          <option>Average</option>
+          <option>Poor</option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label for="exercise_minutes">Exercise Minutes</label>
+        <input type="number" name="exercise_minutes" id="exercise_minutes" class="form-control" required>
+      </div>
+      <div class="form-group mb-3">
+        <label for="stress_level">Stress Level</label>
+        <select name="stress_level" id="stress_level" class="form-select" required>
+          <option>Low</option>
+          <option>Moderate</option>
+          <option>High</option>
+        </select>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-custom btn-primary mt-3">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

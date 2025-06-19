@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Health Prediction{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">🚀 Your Health Prediction</h1>
+  <div class="card card-custom mb-4">
+    <div class="card-header">Health Overview</div>
+    <div class="card-body text-center">
+      <h2>Your Health Score: <strong class="text-success">{{ health_score }} / 100</strong></h2>
+      <h3>Estimated Years Left: <strong class="text-primary">{{ years_left }}</strong></h3>
+    </div>
+  </div>
+
+  <div class="card card-custom mb-4">
+    <div class="card-header">Daily Recommendations</div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        {% for rec in recommendations %}
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i> {{ rec }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a href="{{ url_for('auth.dashboard') }}" class="btn btn-custom btn-secondary">Back to Dashboard</a>
+  </div>
+{% endblock %}

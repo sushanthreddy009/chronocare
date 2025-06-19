@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Farewell to Shilpa Ma’am</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff0f5, #f8e1e9);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+      border: 2px solid #e91e63;
+    }
+
+    .letter {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: #333;
+      line-height: 1.6;
+      text-align: justify;
+      position: relative;
+    }
+
+    .letter h1 {
+      font-size: 2.5rem;
+      color: #e91e63;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .letter .date {
+      font-size: 1.2rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .letter p {
+      margin-bottom: 20px;
+    }
+
+    .letter .signature {
+      font-size: 1.8rem;
+      color: #e91e63;
+      text-align: right;
+      margin-top: 30px;
+      font-weight: 700;
+    }
+
+    /* Floral Decorations */
+    .letter::before,
+    .letter::after {
+      content: '🌸';
+      position: absolute;
+      font-size: 2rem;
+      color: #ff9a8b;
+      opacity: 0.5;
+    }
+
+    .letter::before {
+      top: -20px;
+      left: -20px;
+    }
+
+    .letter::after {
+      bottom: -20px;
+      right: -20px;
+    }
+
+    /* Falling Flowers Animation */
+    .flower {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #e91e63;
+      opacity: 0.7;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Play Music Button */
+    .play-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .play-btn:hover {
+      background: linear-gradient(45deg, #ff9a8b, #e91e63);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    /* Back to Chatbot Button */
+    .back-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #e91e63, #ff9a8b);
+      color: white;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(45deg, #ff9a8b, #e91e63);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="letter">
+      <h1>🌸 A Farewell Letter to Shilpa Vaidya Ma’am 🌸</h1>
+      <div class="date">Date: 09-05-2025</div>
+      <p>Dear Shilpa Ma’am,</p>
+      <p>As we sit down to pen this letter, our hearts are brimming with emotions — gratitude, love, admiration, and a quiet ache of sadness. It’s rare to encounter someone who transcends the role of a trainer to become a mentor, a motivator, and above all, a cherished friend. Today, as we bid you farewell, one truth stands clear: your presence has woven itself into the very fabric of our lives, leaving an imprint that time can never erase.</p>
+      <p>From the moment you stepped into our lives on 13th March, we sensed something extraordinary about you. There was a warmth in your smile, a quiet strength in your voice, and a genuine care in the way you guided us. Within days, you made us feel truly seen, deeply heard, and immensely valued — not just as learners, but as individuals with dreams and fears, hopes and struggles.</p>
+      <p>You didn’t merely teach us technology or tools — you taught us how to think with clarity, grow with courage, and believe in ourselves with unwavering faith. The lessons we absorbed under your guidance in these few months have outshone everything we learned in four years of our B.Tech. That’s not an exaggeration — it’s a testament to the magic of your teaching.</p>
+      <p>You transformed learning into a journey of joy, engagement, and meaning. Never once did you carry the air of a distant “trainer”; instead, you walked beside us, laughed with us, and shared in our journey like a dear friend. You patiently untangled our doubts, celebrated our tiniest victories, and even forgave our late submissions with that gentle smile of yours (most of the time 😅). Your empathy, humility, and kindness — these are the threads that wove this unforgettable chapter of our lives.</p>
+      <p>We’ll forever cherish the moments we shared — the inside jokes that left us in stitches, the surprise feedback sessions that sparked growth, the group laughter that filled the room, the shared nerves before demos, and those profound life lessons you wove seamlessly into our coding sessions. Each memory is a treasure we’ll carry with us always.</p>
+      <p>Ma’am, though today marks your last official day with us, please know this: you’ll forever be a part of our story. The confidence you instilled in us, the mindset you nurtured, and the passion for learning you ignited — these are gifts that don’t fade with time. They’ll guide us, inspire us, and remind us of you in every step we take.</p>
+      <p>We hope that wherever life leads you next, you continue to touch lives with the same magic you brought to ours. Those who cross your path will be blessed to know even a fraction of the Shilpa Ma’am we were privileged to learn from.</p>
+      <p>From the depths of our hearts,<br>Thank you, Ma’am. For everything.<br>We’ll miss you more than words can ever express.<br>This isn’t a goodbye… it’s a tender “see you later.”</p>
+      <p class="signature">With all our love, gratitude, and a few unshed tears,<br>Your Students</p>
+    </div>
+  </div>
+
+  <button class="play-btn" onclick="playMusic()">Play Music</button>
+  <a href="{{ url_for('auth.chatbot') }}" class="back-btn">Back to Chatbot</a>
+
+  <audio id="backgroundMusic" loop>
+    <source src="https://www.fesliyanstudios.com/play-mp3/6977" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Create falling flowers
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.innerHTML = '🌸';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = Math.random() * 5 + 5 + 's'; // Between 5-10s
+      document.body.appendChild(flower);
+
+      // Remove flower after animation
+      flower.addEventListener('animationend', () => {
+        flower.remove();
+      });
+    }
+
+    // Generate flowers every 200ms
+    setInterval(createFlower, 200);
+
+    // Play music function
+    function playMusic() {
+      const audio = document.getElementById('backgroundMusic');
+      audio.play().catch(error => {
+        console.log("Playback failed:", error);
+      });
+    }
+
+    // Stop music when navigating away
+    window.addEventListener('beforeunload', () => {
+      const audio = document.getElementById('backgroundMusic');
+      audio.pause();
+    });
+  </script>
+</body>
+</html>
