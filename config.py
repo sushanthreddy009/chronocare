@@ -1,6 +1,5 @@
-import os
-
+# config.py
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'your_default_key')
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SECRET_KEY = 'your_secret_key'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://username:password@localhost/chronocare'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
