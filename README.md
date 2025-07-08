@@ -18,6 +18,32 @@ This project is built with a focus on user empowerment, security, and accessibil
 - **Secure User Authentication**: Implements sign-up, login, and logout with password hashing for data security.
 - **Contact Us**: Allows users to send messages to the admin via email.
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](screenshots/Home-Page.jpg)
+*The welcoming homepage of ChronoCare-AI featuring an intuitive interface and easy navigation to all key features.*
+
+### Lifestyle Input Form
+![Lifestyle Input Form](screenshots/Lifestyle-Input-Form.jpg)
+*Users can easily input their daily health data including sleep hours, diet quality, exercise minutes, and stress levels.*
+
+### Dashboard
+![Dashboard](screenshots/Dashboard-Page.jpg)
+*Comprehensive dashboard displaying health trends, analytics, and personalized insights based on user data.*
+
+### Health Predictions
+![Health Prediction Page](screenshots/Health-Prediction-Page.jpg)
+*AI-powered health predictions showing personalized health scores, life expectancy estimates, and tailored recommendations.*
+
+### Doctor Appointments
+![Doctor Appointment Page](screenshots/Doctor-Appointment-Page.jpg)
+*Seamless appointment booking system with dynamic slot availability and doctor selection.*
+
+### Interactive Chatbot
+![Chatbot](screenshots/Chatbot.jpg)
+*AI-powered health assistant providing personalized tips and answering health-related questions.*
+
 ## Project Structure
 
 The project is organized into a modular Flask application structure. Below is the detailed folder and file layout:
