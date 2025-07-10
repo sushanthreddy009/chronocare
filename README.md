@@ -14,6 +14,7 @@ This project is built with a focus on user empowerment, security, and accessibil
 - **Insights Analysis**: Offers a deep dive into the last 7 days of data with feedback on sleep quality, exercise habits, and stress management.
 - **Doctor Appointments**: Enables users to book and cancel appointments with doctors, complete with dynamic slot availability and secure authentication.
 - **Interactive Chatbot**: A health assistant that provides tips on diet, exercise, stress, and more, with a fun twist for specific users.
+  (For the Chatbot We integrated the Grok LLM model via the Grok API endpoint (https://api.x.ai/v1/chat/completions), which is provided by xAI (Elon Musk’s AI company). We used it to power our AI health assistant to generate context-aware, health-related responses.)
 - **Report Generation**: Generates downloadable PDF reports summarizing health data, forecasts, and predictions.
 - **Secure User Authentication**: Implements sign-up, login, and logout with password hashing for data security.
 - **Contact Us**: Allows users to send messages to the admin via email.
